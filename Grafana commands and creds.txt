@@ -1,9 +1,10 @@
 Helm commands to install grafana in the namespace "grafana"
 
+kubectl create namespace grafana
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install grafana bitnami/grafana --namespace grafana
-helm install grafana bitnami/grafana --namespace grafana --set adminPassword=yourpassword
+helm install grafana bitnami/grafana --namespace grafana --set adminPassword=yourpassword ## This step can be skipped. Use the default admin credentials.
 
 
 Final outputs on sucessful installation
@@ -16,15 +17,3 @@ Final outputs on sucessful installation
 
     echo "User: admin"
     echo "Password: $(kubectl get secret grafana-admin --namespace grafana -o jsonpath="{.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 -d)"
-
-
-
-
-Grafana Creds, 
-==============
-Username : admin
-Password : akRVOXhaUFFYTw==  (Base64 encoded) 
-
-Decoded password = jDU9xZPQXO 
-
-
